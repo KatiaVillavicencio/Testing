@@ -1,0 +1,96 @@
+<h1>HOME ADMIN</h1>
+<div class="container">
+    <button id="logoutButton">Cerrar Sesión</button>
+    <div class="infoProd">
+        <h1>Lista de Productos con Handlebars</h1>
+        <div class="detalleProd">
+            <div id="productsContainer">
+                <ul>
+                    {{#each products}}
+                    <li data-description="{{this.description}}" data-image="{{this.image}}" data-price="{{this.price}}" 
+                    data-stock="{{this.stock}}" data-category="{{this.category}}" data-available="{{this.availability}}" data-id="{{this._id}}">
+                        <strong>{{this.description}}</strong><br>
+                        Price: ${{this.price}}<br>
+                        Stock: {{this.stock}}<br>
+                        Category: {{this.category}}<br>
+                        Available: {{this.availability}}<br>
+                        ID:{{this._id}}<br>
+                    </li>
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div class="formulario">
+        <h1>Formulario Crear,Actualizar, Eliminar Productos</h1>
+        <form id="prod-form">
+            <input type="hidden" id="productId" name="productId">
+            <div class="inputs">
+                <div>
+                    <input type="text" id="desc" autocomplete="off" placeholder="Ingrese Descripcion" required>
+                    <input type="text" id="img" autocomplete="off" placeholder="Ingrese Imagen" required>
+                    <input type="number" id="price" autocomplete="off" placeholder="Ingrese Precio" required>
+                </div>
+                <div>
+                    <input type="number" id="stock" autocomplete="off" placeholder="Ingrese Stock" required>
+                    <input type="text" id="cat" autocomplete="off" placeholder="Ingrese Categoria" required>
+                    <select name="available" id="available">
+                        <option value="in_stock" selected="true">Con Stock</option>
+                        <option value="out_stock">Sin Stock</option>
+                    </select>
+                </div>
+            </div>
+            <label>Para actualizar y eliminar producto haz clic en el producto en la lista a tu izquierda</label>
+            <div class="botones">
+                <button type="submit" id="btnCrear">Guardar</button>
+                
+                <input type="checkbox" id="eliminarProducto" name="eliminarProducto">
+                Eliminar
+                
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+    document.getElementById('logoutButton').addEventListener('click', cerrarSesion);
+    function cerrarSesion() {
+        localStorage.removeItem("token");
+        window.location.href = '/';
+    }
+    document.addEventListener("DOMContentLoaded", function () {
+        // Obtener referencia a la lista de productos y al formulario
+        const productsList = document.getElementById("productsContainer");
+        const descInput = document.getElementById("desc");
+        const imgInput = document.getElementById("img");
+        const priceInput = document.getElementById("price");
+        const stockInput = document.getElementById("stock");
+        const catInput = document.getElementById("cat");
+        const idInput = document.getElementById("productId");
+
+        // Agregar un evento de clic a la lista de productos
+        productsList.addEventListener("click", function (event) {
+            // Verificar si el clic fue en un elemento de la lista
+            const clickedElement = event.target;
+            if (clickedElement.tagName === "LI") {
+                // Obtener la información del producto desde los atributos del elemento de la lista
+                const description = clickedElement.getAttribute("data-description");
+                const image = clickedElement.getAttribute("data-image");
+                const price = clickedElement.getAttribute("data-price");
+                const stock = clickedElement.getAttribute("data-stock");
+                const category = clickedElement.getAttribute("data-category");
+                const productId = clickedElement.getAttribute("data-id");
+
+                // Actualizar los campos del formulario con la información del producto
+                descInput.value = description;
+                imgInput.value = image;
+                priceInput.value = price;
+                stockInput.value = stock;
+                catInput.value = category;
+                idInput.value = productId;
+
+            }
+        });
+    });
+</script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="/realTimeProducts.js"></script>

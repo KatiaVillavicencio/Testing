@@ -1,0 +1,43 @@
+
+<div id="contenedor">
+  <h1>Tienda Virtual</h1> 
+        <a href="/login"><h1>Login</h1></a>
+        
+     {{#each listadeproductos}}
+    <div class="card">
+        <div class="basicInfo">
+            <div class="title">
+
+                <img src="imagen"{{thumbnail}}>
+                <div class="name">Titulo: {{title}}</div>
+                <div class="info">Descripción:  {{description}}</div>
+                <div class="category"> categoria:{{category}}</div>
+                   <div class="price">Precio: S/.{{price}}</div>
+                    </div>   
+                     <a href="/api/products/{{this._id}}">Ver Detalle</a>
+       
+    </div>
+       {{/each}}
+   </div>
+
+      <a href="/chat"><h1>chat</h1></a>
+      <a href="api/carts"><h1>Carrito</h1></a>
+ 
+
+
+
+
+
+
+
+
+   
+
+
+
+
+
+
+
+
+   
