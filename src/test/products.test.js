@@ -11,20 +11,20 @@ const requester = supertest(app);
 describe("Testing Products", () => {
 
     it("debería devolver una lista de productos", async () => {
-        // Realizar la búsqueda de todos los productos en la base de datos
+        // Realizar la búsqueda de todos los productos en la BD
         const productsInDB = await productModel.find();
 
-        // Verificar que se haya obtenido al menos un producto
+        // Verificar que se haya obtenido al menos 1 producto
         if (productsInDB.length > 0) {
-            // Se obtuvieron productos
+            // Se obtienen productos
             console.log("Se obtuvieron los siguientes productos:", productsInDB);
         } else {
-            // No se obtuvieron productos
+            // No se obtienen productos
             console.log("No se encontraron productos en la base de datos.");
         }
 
-        // Simplemente muestra en consola si se obtuvieron productos o no,
-        // sin realizar expectativas detalladas sobre cada campo del producto.
+        // muestra en consola si se obtuvieron productos o no,
+     
     });
 
     it("El DAO debe agregar un producto en la DB", async function () {
