@@ -33,8 +33,12 @@
   "license": "ISC",
   "description": "",
   "devDependencies": {
+    "@types/chai": "^4.3.11",
+    "@types/supertest": "^6.0.2",
     "@types/swagger-jsdoc": "^6.0.4",
     "@types/swagger-ui-express": "^4.1.6",
-    "mocha": "^10.2.0"
+    "chai": "^5.0.0",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
   }
 }
